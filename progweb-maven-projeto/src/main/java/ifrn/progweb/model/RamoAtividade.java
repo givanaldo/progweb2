@@ -67,4 +67,9 @@ public class RamoAtividade implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "RamoAtividade [id=" + id + ", descricao=" + descricao + "]";
+	}
+
 }

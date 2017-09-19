@@ -130,6 +130,15 @@ public class Empresa implements Serializable {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "[" + id + "] " + nomeFantasia 
+	      + "\nRazão Social: " + razaoSocial + "("	+ cnpj + ") "
+	      + "\nFundação: " + dataFundacao 
+	      + "\nAtividade: " + ramoAtividade.getDescricao() 
+	      + "\nTipo: " + tipo + "\n";
+	}
+
 	
 }

@@ -29,4 +29,14 @@
     <servlet-name>Servlet2</servlet-name>
     <url-pattern>/Servlet2</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpresaServlet</display-name>
+    <servlet-name>EmpresaServlet</servlet-name>
+    <servlet-class>ifrn.progweb.view.EmpresaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpresaServlet</servlet-name>
+    <url-pattern>/EmpresaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

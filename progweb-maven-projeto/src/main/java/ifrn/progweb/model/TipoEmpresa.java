@@ -1,13 +1,6 @@
 package ifrn.progweb.model;
 
 public enum TipoEmpresa {
-	ME,
-	MEI,
-	EIRELI,
-	LTDA,
-	SA;
-
-	/*
 	ME ("Microempresa"),
 	MEI ("Microempreendedor Individual"),
 	EIRELI ("Empresa Individual de Responsabilidade Limitada"),
@@ -26,5 +19,5 @@ public enum TipoEmpresa {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}*/
+	}
 }
