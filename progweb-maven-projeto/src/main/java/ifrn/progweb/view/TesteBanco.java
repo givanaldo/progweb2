@@ -8,7 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
+import ifrn.progweb.dao.EmpresaDao;
+import ifrn.progweb.dao.RamoAtividadeDao;
 import ifrn.progweb.model.Empresa;
 import ifrn.progweb.model.JpaUtil;
 import ifrn.progweb.model.RamoAtividade;
@@ -21,31 +24,40 @@ public class TesteBanco {
 	public static void main(String[] args) {
 		
 		EntityManager manager = JpaUtil.getEntityManager();
-
-		Query consulta = manager.createQuery("from Empresa", Empresa.class); 
-		List<Empresa> listaEmpresas = consulta.getResultList();
-		for (Empresa empresa : listaEmpresas)
-			System.out.println(empresa.toString());
 		
-		consulta = manager.createQuery("from RamoAtividade", RamoAtividade.class);
-		List<RamoAtividade> listaAtividades = consulta.getResultList();
+		RamoAtividadeDao ativDao = new RamoAtividadeDao(manager);
+		EmpresaDao emprDao = new EmpresaDao(manager);
+
+		List<RamoAtividade> listaAtiv = ativDao.pesquisar("");
 		System.out.println("\n\n=== Atividades ===");
-		for (RamoAtividade atividade : listaAtividades)
-			System.out.println(atividade.toString());
+		for (RamoAtividade atividade : listaAtiv)
+			System.out.println(atividade);
 		
 		// inserir uma atividade
 		RamoAtividade novaAtividade = new RamoAtividade();
 		novaAtividade.setDescricao("Tecnologia da Informação");
 		manager.getTransaction().begin();
-		manager.persist(novaAtividade);
+		ativDao.adicionar(novaAtividade);
 		manager.getTransaction().commit();
 		
-		consulta = manager.createQuery("from RamoAtividade", RamoAtividade.class);
-		listaAtividades = consulta.getResultList();
+		listaAtiv = ativDao.pesquisar("");
 		System.out.println("\n\n=== Atividades ===");
-		for (RamoAtividade atividade : listaAtividades)
-			System.out.println(atividade.toString());
+		for (RamoAtividade atividade : listaAtiv)
+			System.out.println(atividade);
+		
+		listaAtiv = ativDao.pesquisar("te");
+		System.out.println("\n\n=== Atividades ===");
+		for (RamoAtividade atividade : listaAtiv)
+			System.out.println(atividade);
 
+		RamoAtividade ativ = ativDao.pesquisarPorId(3L);
+    	System.out.println("\n\n" + ativ);
+
+	
+		List<Empresa> listaEmpr = emprDao.pesquisar("");
+		for (Empresa empresa : listaEmpr)
+			System.out.println(empresa.toString());
+		
 		// inserir uma empresa
 		Empresa novaEmpresa = new Empresa();
 		novaEmpresa.setNomeFantasia("João da Silva");
@@ -53,16 +65,21 @@ public class TesteBanco {
 		novaEmpresa.setRazaoSocial("João da Silva 41952519000157");
 		novaEmpresa.setTipo(TipoEmpresa.MEI);
 		novaEmpresa.setDataFundacao(new Date());
-		novaEmpresa.setRamoAtividade(listaAtividades.get(4));
-		manager.getTransaction().begin();
-		manager.persist(novaEmpresa);
-		manager.getTransaction().commit();
+		novaEmpresa.setRamoAtividade(ativDao.pesquisarPorId(5L));
+		emprDao.adicionar(novaEmpresa);
 		
-		consulta = manager.createQuery("from Empresa", Empresa.class); 
-		listaEmpresas = consulta.getResultList();
-		for (Empresa empresa : listaEmpresas)
+		listaEmpr = emprDao.pesquisar("");
+		for (Empresa empresa : listaEmpr)
 			System.out.println(empresa.toString());
 		
+		Empresa empresaExcluir = new Empresa();
+		empresaExcluir.setId(3L);		
+		emprDao.remover(empresaExcluir);
+
+		listaEmpr = emprDao.pesquisar("");
+		for (Empresa empresa : listaEmpr)
+			System.out.println(empresa.toString());
+
 		manager.close();
 	}
 }
