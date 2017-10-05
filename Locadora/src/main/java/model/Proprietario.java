@@ -16,16 +16,22 @@ public class Proprietario implements Serializable {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
 	@Column(nullable=false, length=100)
 	private String nome;
+	
 	@Column(nullable=false, length=14)
 	private String cpf;
+	
 	@Column(nullable=false, length=20)
 	private String rg;
+	
 	@Column(length=100)
 	private String email;
+	
 	@Column(nullable=false, length=20)
 	private String telefone;
+	
 	@Column(length=100)
 	private byte foto;
 	

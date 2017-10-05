@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,14 +21,21 @@ public class Locacao implements Serializable {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
 	@Column(name="num_vaga", nullable=false, length=100)
 	private String numeroVaga;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="data_entrada", nullable=false)
 	private Date dataEntrada;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="data_saida", nullable=false)
 	private Date dataSaida;
+	
+	@ManyToOne @JoinColumn(name="id_veiculo")
+	private Veiculo veiculo;
+
 	
 	public Locacao() {
 		super();
@@ -62,6 +71,14 @@ public class Locacao implements Serializable {
 
 	public void setDataSaida(Date dataSaida) {
 		this.dataSaida = dataSaida;
+	}
+	
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	@Override

@@ -21,21 +21,25 @@ public class Veiculo implements Serializable {
 
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private long id;
+	
 	@Column(nullable=false)
 	private int ano;
+	
 	@Column(nullable=false, length=50)
 	private String modelo;
+	
 	@Column(length=100)
 	private byte foto;
+	
 	@Enumerated(EnumType.STRING)
 	private Cor cor;
+	
 	@Enumerated(EnumType.STRING)
 	private Marca marca;
-	@ManyToOne @JoinColumn(name="proprietario_id")
-	private Proprietario proprietario;
-	@ManyToOne @JoinColumn(name="locacao_id")
-	private Locacao locacao;
 	
+	@ManyToOne @JoinColumn(name="id_proprietario", nullable = false)
+	private Proprietario proprietario;
+		
 	public Veiculo() {
 		
 	}
@@ -81,12 +85,6 @@ public class Veiculo implements Serializable {
 	}
 	public void setProprietario(Proprietario proprietario) {
 		this.proprietario = proprietario;
-	}
-	public Locacao getLocacao() {
-		return locacao;
-	}
-	public void setLocacao(Locacao locacao) {
-		this.locacao = locacao;
 	}
 	
 	@Override

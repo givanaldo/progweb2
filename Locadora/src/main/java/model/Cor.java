@@ -1,9 +1,9 @@
 package model;
 
 public enum Cor {
-	Preta, 
-	Branca,
+	Preto, 
+	Branco,
 	Prata,
-	Vermelha,
+	Vermelho,
 	Cinza;
 }
