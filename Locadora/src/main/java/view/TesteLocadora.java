@@ -1,23 +1,39 @@
 package view;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
+import dao.LocacaoDao;
+import dao.ProprietarioDao;
+import dao.VeiculoDao;
 import model.JpaUtil;
+import model.Locacao;
+import model.Proprietario;
+import model.Veiculo;
 
 public class TesteLocadora {
 
 	public static void main(String[] args) {
 		
 		EntityManager manager = JpaUtil.getEntityManager();
-
-		//manager.getTransaction().begin();
+	
+		VeiculoDao veiculoDao = new VeiculoDao(manager);
+		for (Veiculo v : veiculoDao.pesquisar("")) {
+			System.out.println(v);
+		}
 		
+		System.out.println("");
 		
-			
-		//manager.getTransaction().commit();
+		ProprietarioDao proprietarioDao = new ProprietarioDao(manager);
+		for (Proprietario p : proprietarioDao.pesquisar("")) {
+			System.out.println(p);
+		}
 		
+		System.out.println("");
+		
+		LocacaoDao locacaoDao = new LocacaoDao(manager);
+		for (Locacao l : locacaoDao.pesquisar()) {
+			System.out.println(l);
+		}
 	}
 
 }

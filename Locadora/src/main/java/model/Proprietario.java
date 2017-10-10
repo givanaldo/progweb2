@@ -33,7 +33,7 @@ public class Proprietario implements Serializable {
 	private String telefone;
 	
 	@Column(length=100)
-	private byte foto;
+	private String foto;
 	
 	public Proprietario() {
 		
@@ -87,11 +87,11 @@ public class Proprietario implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public byte getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 
@@ -116,4 +116,12 @@ public class Proprietario implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Proprietario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", email=" + email
+				+ ", telefone=" + telefone + ", foto=" + foto + "]";
+	}
+	
+	
 }

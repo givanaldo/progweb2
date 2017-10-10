@@ -102,5 +102,13 @@ public class Locacao implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Locacao [id=" + id + ", numeroVaga=" + numeroVaga + ", dataEntrada=" + dataEntrada + ", dataSaida="
+				+ dataSaida + ", veiculo=" + veiculo.getModelo() + "]";
+	}
+	
+	
 	
 }

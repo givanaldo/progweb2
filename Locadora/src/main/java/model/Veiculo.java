@@ -29,7 +29,7 @@ public class Veiculo implements Serializable {
 	private String modelo;
 	
 	@Column(length=100)
-	private byte foto;
+	private String foto;
 	
 	@Enumerated(EnumType.STRING)
 	private Cor cor;
@@ -62,10 +62,10 @@ public class Veiculo implements Serializable {
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-	public byte getFoto() {
+	public String getFoto() {
 		return foto;
 	}
-	public void setFoto(byte foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 	public Cor getCor() {
@@ -108,4 +108,12 @@ public class Veiculo implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ID: " + id + ", ano=" + ano + ", modelo=" + modelo + ", foto=" + foto + ", cor=" + cor
+				+ ", marca=" + marca + ", proprietario=" + proprietario.getNome() + "]";
+	}
+	
+	
 }
