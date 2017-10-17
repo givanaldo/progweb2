@@ -1,7 +1,7 @@
 package model;
 
 public enum TipoCombustivel {
-	ALCÓOL,
+	ÁLCOOL,
 	GASOLINA,
 	DIESEL,
 	BICOMBUSTIVEL,
