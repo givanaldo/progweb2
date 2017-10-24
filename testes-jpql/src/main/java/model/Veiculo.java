@@ -54,7 +54,8 @@ public class Veiculo implements Serializable {
 	@Column(name = "data_cadastro", nullable = false)
 	private Date dataCadastro;
 	
-	@ManyToOne 
+	// adiciona (fetch = FetchType.LAZY) abaixo para usar o Lazy Loading
+	@ManyToOne
 	@JoinColumn(name = "cod_proprietario")
 	private Proprietario proprietario;
 	

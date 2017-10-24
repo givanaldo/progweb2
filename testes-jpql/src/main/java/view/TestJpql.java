@@ -15,16 +15,17 @@ public class TestJpql {
 	public static void main(String[] args) {
 		
 		EntityManager manager = JpaUtil.getEntityManager();
-		
+		/*
 		// Consulta tipada com parâmetros
 		TypedQuery<Veiculo> queryVeiculo = 
 				manager.createQuery("from Veiculo where anoModelo >= :ano and valor <= :preco", Veiculo.class);
 		queryVeiculo.setParameter("ano", 2009);
-		queryVeiculo.setParameter("preco", new BigDecimal(25000));
+		queryVeiculo.setParameter("preco", new BigDecimal(30_000));
 		List<Veiculo> veiculos = queryVeiculo.getResultList();
 		for (Veiculo v : veiculos) {
 			System.out.println(v.getCodigo() + " - " + v.getFabricante() + " " + 
-		                       v.getModelo() + " (" + v.getAnoModelo() + "): R$ " + v.getValor());
+		                       v.getModelo() + " (" + v.getAnoModelo() + "): R$ " + 
+		                       v.getValor() + " - Proprietário: " + v.getProprietario().getNome());
 		}
 		
 		// Projeções
@@ -37,9 +38,11 @@ public class TestJpql {
 		TypedQuery<Object[]> queryValores = manager.createQuery("select modelo, valor from Veiculo", Object[].class);
 		List<Object[]> valores = queryValores.getResultList();
 		for (Object[] resultado : valores) {
-			System.out.println(resultado[0] + ": R$ " + resultado[1]);
+			String modelo = (String) resultado[0];
+			BigDecimal valor = (BigDecimal) resultado[1];
+			System.out.println(modelo + ": R$ " + valor);
 		}
-		
+		*/
 		// Funções de agregação
 		TypedQuery<TotalCarroPorAno> queryTotal = 
 				manager.createQuery("select new model.TotalCarroPorAno(v.anoFabricacao, "
