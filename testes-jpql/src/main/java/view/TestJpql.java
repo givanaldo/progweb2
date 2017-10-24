@@ -10,6 +10,8 @@ public class TestJpql {
 		
 		EntityManager manager = JpaUtil.getEntityManager();
 		
+		// Consulta simples
+		
 	}
 
 }
