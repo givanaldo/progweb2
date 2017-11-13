@@ -7,7 +7,7 @@
 	<display-name>progweb-maven-projeto</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>GestaoEmpresas.xhtml</welcome-file>
+		<welcome-file>GestaoEmpresasV1.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>
