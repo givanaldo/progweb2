@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8"/>
+	<title>Gestão Empresas</title>
+	<h:outputStylesheet name="estilo.css" />
+</h:head>
+
+<h:body>
+	<header>
+		<h:graphicImage name="logo.png" />
+	</header>
+  
+	<div class="conteudo">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Razão social: " for="razaoSocial" />
+				<h:inputText id="razaoSocial" />
+				
+				<h:outputLabel value="Nome fantasia: " for="nomeFantasia" />
+				<h:inputText id="nomeFantasia" />
+				
+				<h:outputLabel value="Tipo empresa: " for="tipo" />
+				<h:selectOneMenu id="tipo">
+					<f:selectItem itemLabel="Selecione..." />
+					<f:selectItem itemLabel="ME" itemValue="ME" />
+					<f:selectItem itemLabel="MEI" itemValue="MEI" />
+					<f:selectItem itemLabel="EIRELI" itemValue="EIRELI" />
+					<f:selectItem itemLabel="LTDA" itemValue="LTDA" />
+					<f:selectItem itemLabel="SA" itemValue="SA" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel />
+				<h:commandButton value="Salvar" />
+			</h:panelGrid>
+			
+		</h:form>
+	</div>
+	
+	<footer>
+		Programação Web II - JavaServer Faces
+	</footer>
+</h:body>
+
+</html>
+
