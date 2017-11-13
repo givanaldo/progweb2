@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import model.Locacao;
-import model.Veiculo;
 
 public class LocacaoDao implements Serializable {
 
