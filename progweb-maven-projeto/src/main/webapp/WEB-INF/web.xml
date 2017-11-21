@@ -4,10 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+	
 	<display-name>progweb-maven-projeto</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>GestaoEmpresasV4.xhtml</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>
@@ -28,4 +29,5 @@
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>
+	
 </web-app>

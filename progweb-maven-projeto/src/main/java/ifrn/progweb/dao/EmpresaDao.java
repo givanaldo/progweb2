@@ -1,5 +1,6 @@
 package ifrn.progweb.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,10 +9,16 @@ import javax.persistence.TypedQuery;
 
 import ifrn.progweb.model.Empresa;
 
-public class EmpresaDao {
+public class EmpresaDao implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private EntityManager manager;
+
+	public EmpresaDao() {
+
+	}
 
 	public EmpresaDao(EntityManager manager) {
 		this.manager = manager;
@@ -20,7 +27,7 @@ public class EmpresaDao {
 	public Empresa adicionar(Empresa empresa) {
 		// manager.getTransaction().begin(); -- não é mais necessário
 		return manager.merge(empresa);
-		// manager.getTransaction().commit();
+		// manager.getTransaction().commit(); -- não é mais necessário
 	}
 	
 	public Empresa pesquisarPorId(Long id) {
@@ -29,9 +36,7 @@ public class EmpresaDao {
 	
 	public void remover(Empresa empresa) {
 		empresa = pesquisarPorId(empresa.getId());
-		// manager.getTransaction().begin();
 		manager.remove(empresa);
-		// manager.getTransaction().commit();
 	}
 	
 	public List<Empresa> pesquisar(String nomeFantasia) {
@@ -41,6 +46,5 @@ public class EmpresaDao {
 		consulta.setParameter("nomeFantasia", nomeFantasia + "%");
 		return consulta.getResultList();
 	}
-	
 	
 }

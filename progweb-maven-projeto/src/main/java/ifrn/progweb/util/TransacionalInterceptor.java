@@ -10,17 +10,22 @@ import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-@Interceptor // anotação do CDI que informa que esta classe é interceptadora
-@Transacional // informa ao CDI que a classe (poderia ser método) abre e fecha transações
-@Priority(Interceptor.Priority.APPLICATION) // ativar o interceptador com prioridade de aplicação
+// anotação do CDI que informa que esta classe é interceptadora.
+@Interceptor
+// informa ao CDI que a classe (poderia ser método também) abre e fecha transações.
+@Transacional
+// ativar o interceptador com prioridade de aplicação.
+@Priority(Interceptor.Priority.APPLICATION)     
 public class TransacionalInterceptor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject // atributo que será injetado pelo CDI depois da chamada do método produtor
+	// atributo que será injetado pelo CDI depois da chamada do método produtor.
+	@Inject     
 	private EntityManager manager;
 
-	@AroundInvoke // método interceptador que é chamado pela anotação @Transacional
+	// método interceptador que é chamado pela anotação @Transacional.
+	@AroundInvoke      
 	public Object invoke(InvocationContext context) throws Exception {
 		EntityTransaction trx = manager.getTransaction();
 		boolean criador = false;
