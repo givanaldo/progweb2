@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
+// Anotação utilizada nos métodos em que precisar abrir e fechar uma transação
+
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @InterceptorBinding

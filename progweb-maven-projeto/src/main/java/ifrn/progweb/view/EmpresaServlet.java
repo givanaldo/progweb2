@@ -5,14 +5,13 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ifrn.progweb.model.Empresa;
+import ifrn.progweb.model.JpaUtil;
 
 /**
  * Servlet implementation class EmpresaServlet
@@ -35,9 +34,7 @@ public class EmpresaServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 
-		EntityManagerFactory factory =	Persistence.createEntityManagerFactory("ExemploPU");
-		EntityManager manager = factory.createEntityManager();	
-		
+		EntityManager manager = JpaUtil.getEntityManager();		
 		List<Empresa> empresas = manager.createQuery("from Empresa", Empresa.class).getResultList();
 		
 		for (Empresa empresa : empresas) {
@@ -45,7 +42,6 @@ public class EmpresaServlet extends HttpServlet {
 		}
 		
 		manager.close();
-		factory.close();
 	}
 
 	/**
