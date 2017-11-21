@@ -4,25 +4,25 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-	<meta charset="UTF-8"/>
+	<meta charset="UTF-8" />
 	<title>Gestão Empresas</title>
-	<h:outputStylesheet name="estilo.css" />
+	<h:outputStylesheet library="css" name="estilo.css" />
 </h:head>
 
 <h:body>
 	<header>
-		<h:graphicImage name="logo.png" />
+		<h:graphicImage library="img" name="logo.png" />
 	</header>
-  
+
 	<div class="conteudo">
 		<h:form>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Razão social: " for="razaoSocial" />
 				<h:inputText id="razaoSocial" />
-				
+
 				<h:outputLabel value="Nome fantasia: " for="nomeFantasia" />
 				<h:inputText id="nomeFantasia" />
-				
+
 				<h:outputLabel value="Tipo empresa: " for="tipo" />
 				<h:selectOneMenu id="tipo">
 					<f:selectItem itemLabel="Selecione..." />
@@ -32,20 +32,35 @@
 					<f:selectItem itemLabel="LTDA" itemValue="LTDA" />
 					<f:selectItem itemLabel="SA" itemValue="SA" />
 				</h:selectOneMenu>
-				
+
 				<h:outputLabel />
 				<h:commandButton value="Salvar" />
 			</h:panelGrid>
-			
-			<h:dataTable>
-				
+
+			<h:dataTable value="#{[0, 0, 0, 0]}">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Razão social" />
+					</f:facet>
+					<h:outputText value="Organizações Tabajara LTDA" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome fantasia" />
+					</f:facet>
+					<h:outputText value="Tabajara" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo Empresa" />
+					</f:facet>
+					<h:outputText value="LTDA" />
+				</h:column>
 			</h:dataTable>
 		</h:form>
 	</div>
-	
-	<footer>
-		Programação Web II - JavaServer Faces
-	</footer>
+
+	<footer> Programação Web II - JavaServer Faces </footer>
 </h:body>
 
 </html>
