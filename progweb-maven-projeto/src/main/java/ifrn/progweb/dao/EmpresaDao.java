@@ -47,4 +47,7 @@ public class EmpresaDao implements Serializable {
 		return consulta.getResultList();
 	}
 	
+	public List<Empresa> todas() {
+        return manager.createQuery("from Empresa", Empresa.class).getResultList();
+   }
 }

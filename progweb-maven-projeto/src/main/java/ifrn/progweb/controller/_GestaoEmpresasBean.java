@@ -2,15 +2,15 @@ package ifrn.progweb.controller;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
+//import javax.enterprise.context.ApplicationScoped;
+//import javax.enterprise.context.RequestScoped;
+//import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 @Named
-//@RequestScoped
 @ViewScoped
+//@RequestScoped
 //@SessionScoped
 //@ApplicationScoped
 public class _GestaoEmpresasBean implements Serializable {
