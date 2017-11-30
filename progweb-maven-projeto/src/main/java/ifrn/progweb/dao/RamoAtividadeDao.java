@@ -16,6 +16,10 @@ public class RamoAtividadeDao implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
+	public RamoAtividadeDao() {
+
+	}
+
 	public RamoAtividadeDao(EntityManager manager) {
 		this.manager = manager;
 	}

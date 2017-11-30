@@ -11,6 +11,11 @@
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 	
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
