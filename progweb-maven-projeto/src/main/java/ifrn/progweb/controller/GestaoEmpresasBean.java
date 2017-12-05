@@ -1,12 +1,15 @@
 package ifrn.progweb.controller;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.convert.Converter;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.context.RequestContext;
 
 import ifrn.progweb.dao.EmpresaDao;
 import ifrn.progweb.dao.RamoAtividadeDao;
@@ -64,8 +67,12 @@ public class GestaoEmpresasBean implements Serializable {
 		// verificar se usuario disparou uma pesquisa e refazer a mesma.
 		if (houvePesquisa())
 			pesquisar();
+		else
+			todasEmpresas();
 		
-		messages.info("Empresa cadastrada com sucesso!");
+		messages.info("Empresa salva com sucesso!");
+		
+		RequestContext.getCurrentInstance().update(Arrays.asList("frm:messages", "frm:empresasDataTable"));
 	}
 	
 	private boolean houvePesquisa() {
@@ -103,4 +110,12 @@ public class GestaoEmpresasBean implements Serializable {
     public Empresa getEmpresa() {
 		return empresa;
 	}
+    
+    public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+    
+    public boolean isEmpresaSelecionada() {
+    		return empresa != null && empresa.getId() != null;
+    }
 }

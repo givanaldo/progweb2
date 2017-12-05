@@ -13,11 +13,11 @@
 			<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
 		</f:metadata>
 		
-		<h:form>
+		<h:form id="frm">
 		
-			<p:messages autoUpdate="true" />
+			<p:messages id="messages" />
 		
-			<p:toolbar>
+			<p:toolbar id="toolbar">
 				<f:facet name="left">			
 					<p:inputText id="termoPesquisa" 
 						placeholder="Digite aqui um termo para pesquisa..." size="35"
@@ -25,7 +25,8 @@
 					
 					<p:commandButton title="Pesquisar" icon="fa fa-search"
 						actionListener="#{gestaoEmpresasBean.pesquisar}" 
-						update="empresasDataTable" process="@this termoPesquisa" />
+						update="empresasDataTable messages" 
+						process="@this termoPesquisa" />
 					
 					<span class="ui-separator">
 		                <span class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -34,15 +35,19 @@
 		            <p:commandButton value="Nova" icon="fa fa-plus"
 		            			actionListener="#{gestaoEmpresasBean.prepararNovaEmpresa}"
 		            			oncomplete="PF('empresaDialogWidgetVar').show()"
-		            			update="empresaDialog" process="@this" />
+		            			update="empresaDialog" process="@this" >
+		            		<p:resetInput target="empresaDialog" />
+		            	</p:commandButton>
 		            
 					<span class="ui-separator">
 		                <span class="ui-icon ui-icon-grip-dotted-vertical" />
 		            </span>
 		            
-		            <p:commandButton title="Editar" icon="fa fa-edit" />
+		            <p:commandButton title="Editar" icon="fa fa-edit"
+		            		disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
 		            
-		            <p:commandButton title="Excluir" icon="fa fa-trash" />
+		            <p:commandButton title="Excluir" icon="fa fa-trash" 
+		            		disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
 		            
 					<span class="ui-separator">
 		                <span class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -56,7 +61,13 @@
 			
 			<p:dataTable id="empresasDataTable" value="#{gestaoEmpresasBean.listaEmpresas}"
 				var="empresa" emptyMessage="Nenhuma informação a ser exibida"
-				paginator="true" rows="10" paginatorPosition="bottom">
+				paginator="true" rows="10" paginatorPosition="bottom"
+				selectionMode="single" selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
+				
+				<p:ajax event="rowSelect" update="frm:toolbar" />
+				
+				<p:ajax event="rowUnselect" update="frm:toolbar" />
+				
 				<p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
 					<h:outputText value="#{empresa.razaoSocial}" />
 				</p:column>
@@ -82,6 +93,11 @@
 			
 			<p:dialog id="empresaDialog" header="Nova empresa" widgetVar="empresaDialogWidgetVar"
 					  modal="true" resizable="false" closeOnEscape="true">
+				
+				<p:messages id="empresaMessages" />
+				
+				<p:defaultCommand target="salvarButton" scope="empresaDialog" />
+				
 				<h:panelGrid id="empresaPanelGrid" columns="2"
 						rendered="#{gestaoEmpresasBean.empresa ne null}">
 					<p:outputLabel value="Razão social: " for="razaoSocial" />
@@ -89,7 +105,7 @@
 						value="#{gestaoEmpresasBean.empresa.razaoSocial}" />
 					
 					<p:outputLabel value="Nome fantasia: " for="nomeFantasia" />
-					<p:inputText id="nomeFantasia" size="80" maxlength="120"
+					<p:inputText id="nomeFantasia" size="80" maxlength="80"
 						value="#{gestaoEmpresasBean.empresa.nomeFantasia}" />
 					
 					<p:outputLabel value="Tipo empresa: " for="tipo" />
@@ -117,9 +133,10 @@
 						itemValue="#{ramoAtividade}"/>
 					
 					<h:outputLabel />
-					<p:commandButton value="Salvar" actionListener="#{gestaoEmpresasBean.salvar}"
-						update="empresasDataTable empresaPanelGrid"
-						oncomplete="PF('empresaDialogWidgetVar').hide()"
+					<p:commandButton id="salvarButton" value="Salvar" 
+						actionListener="#{gestaoEmpresasBean.salvar}"
+						update="empresaPanelGrid empresaMessages"
+						oncomplete="if (!args.validationFailed) PF('empresaDialogWidgetVar').hide()"
 						process="empresaDialog" />
 				</h:panelGrid>
 			</p:dialog>	

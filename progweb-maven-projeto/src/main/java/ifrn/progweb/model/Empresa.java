@@ -16,6 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 @Table(name = "empresa")
@@ -23,26 +28,35 @@ public class Empresa implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty
 	@Column(name = "nome_fantasia", nullable = false, length = 100)
 	private String nomeFantasia;
 	
+	@NotEmpty
 	@Column(name = "razao_social", nullable = false, length = 80)
 	private String razaoSocial;
 	
+	@CNPJ
+	@NotNull
 	@Column(nullable = false, length = 18)
 	private String cnpj;
 	
+	@Past
+	@NotNull
 	@Column(name = "data_fundacao")
 	@Temporal(TemporalType.DATE)
 	private Date dataFundacao;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "ramo_atividade_id")
 	private RamoAtividade ramoAtividade;
 	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 50)
 	private TipoEmpresa tipo;
