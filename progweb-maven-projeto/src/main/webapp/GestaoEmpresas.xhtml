@@ -15,6 +15,11 @@
 		
 		<h:form id="frm">
 		
+			<p:confirmDialog global="true">
+				<p:commandButton value="Não" icon="fa fa-remove" styleClass="ui-confirmdialog-no" />
+				<p:commandButton value="Sim" icon="fa fa-check" styleClass="ui-confirmdialog-yes" />
+			</p:confirmDialog>
+		
 			<p:messages id="messages" />
 		
 			<p:toolbar id="toolbar">
@@ -52,16 +57,21 @@
 		            	</p:commandButton>
 		            
 		            <p:commandButton title="Excluir" icon="fa fa-trash" 
-		            		disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
-		            		actionListener="#{gestaoEmpresasBean.excluir}" 
-		            		update="messages empresasDataTable toolbar"
-		            		process="@this" />
+		            			disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+		            			actionListener="#{gestaoEmpresasBean.excluir}" 
+		            			update="messages empresasDataTable toolbar"
+		            			process="@this">
+		            		<p:confirm icon="ui-icon-alert" header="Confirmação de exclusão"
+		            			message="Confirma exclusão da empresa?" />
+		            	</p:commandButton>
 		            
 					<span class="ui-separator">
 		                <span class="ui-icon ui-icon-grip-dotted-vertical" />
 		            </span>
 		            
-		            <p:commandButton value="Exportar para o Excel" icon="fa fa-file-excel-o" />			
+		            <p:commandButton value="Exportar para o Excel" icon="fa fa-file-excel-o" ajax="false">
+		            		<p:dataExporter type="xls" target="empresasDataTable" fileName="Empresas" />
+		            </p:commandButton>			
 				</f:facet>
 			</p:toolbar>
 			

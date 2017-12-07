@@ -85,7 +85,6 @@ public class GestaoEmpresasBean implements Serializable {
 		empresa = null;
 		atualizarRegistros();
 		messages.info("Empresa excluída com sucesso!");
-		
 	}
 	
 	private boolean houvePesquisa() {
